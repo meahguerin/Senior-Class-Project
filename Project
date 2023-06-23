@@ -1,0 +1,281 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+//Math functions
+
+//vehicle 'math function' [Jarrett]
+double vehicle_funct(int days_a_week, int miles, double co2)
+{
+
+    const double month = 4;
+    const double semester = 15;
+
+    double total_emissions;
+
+    total_emissions = (((miles * 2 * co2) / month) * semester) / days_a_week;
+    return total_emissions;
+}
+
+
+double bus_funct(int days_a_week, int miles, double co2, double pkm)
+{
+
+    const double month = 4;
+    const double semester = 15;
+
+    double total_emissions;
+
+    total_emissions = ((((miles * 2 / pkm) * co2) / month) * semester) / days_a_week;
+    return total_emissions;
+}
+
+
+double book_funct(int soft, int hard)  // [Alyssa] ( remove "/ * * /" ) Enter 'books' function below:
+{
+    const double sco2 = 5;
+    const double hco2 = 10.2;
+    const double quarter = 3; // 3 quarters is one school year
+    double total_book_year;
+    double total_book;
+
+    total_book_year = (soft * sco2) + (hard * hco2) * quarter;
+    total_book = total_book_year / 2; //dividing by 2 to get co2 emissions for a semester
+    return total_book;
+}
+
+
+double clothes_funct(int num_clothes) // [Alyssa] ( remove "/ * * /" ) Enter 'clothes' function below:
+{
+    const double article = 0.2756;
+    const double clothesco2 = 6.5;
+    const double weeks = 4;
+    const double days = 7;
+    double total_clothes_day;
+    double total_clothes;
+
+    total_clothes_day = (((num_clothes * article * clothesco2) / 4) / 7);
+    total_clothes = total_clothes_day * 105; // multiplying by 105 for the days in a semester;
+    return total_clothes;
+}
+
+
+double laptop_funct(double hours, double co2, double years_owned) //( remove "/ * * /" ) [Di'Andrei] Enter 'laptop' function below:
+{
+    const double month = 4;
+    const double semester = 15;
+    const double years = 4;
+
+
+    double total_emissions;
+
+    total_emissions = (co2 + (co2 * years_owned / years) / semester);
+    return total_emissions;
+}
+
+
+double smart_phone_funct(double hours, double co2, double years_owned) //( remove "/ * * /" ) [Di'Andrei] Enter 'books'smart phone' function below:
+
+{
+    const double month = 4;
+    const double semester = 15;
+    const double years = 4;
+    const double co2_2 = 28;
+
+    double total_emissions;
+
+    total_emissions = (co2 + (co2_2 / month) * years_owned / semester);
+    return total_emissions;
+}
+
+//Void functions(where everybody's code goes)
+
+//vehicle void function [Jarrett & Meah]
+void vehicles()
+{
+    int miles;
+    int days_a_week;
+    int first_choice;
+    int vehicle_choice;
+
+    double co2_small = 0.32990;
+    double co2_average = 0.40935;
+    double co2_suvtruck = 0.56964;
+
+    double co2_bus = 0.18891; // passenger miles
+    double pkm = 0.62137;
+
+    std::cout << "Do you drive to school or ride the bus to school?\n" << "0. Neither \n1. Drive\n2. Bus\n";
+    std::cin >> first_choice;
+    switch (first_choice)
+    {
+    case 0:
+        std::cout << "Returning to main menu...\n\n"
+            << "=====================================================================================================================\n\n";
+        return;
+    case 1:
+        std::cout << "What kind of vehicle do you drive?\n\n";
+        std::cout << "1.Small \t2.Average \t3.SUV/truck\n\n";
+        break;
+    case 2:
+        std::cout << "How many days a week do you attend school?\n\n";
+        std::cin >> days_a_week;
+        std::cout << "Approximately, how many miles does it take you to commute from home to school?\n\n";
+        std::cin >> miles;
+        std::cout << "Based on the number of days you go to school in a week, the bus emits about " << bus_funct(days_a_week, miles, co2_bus, pkm) << " kg CO2e(kilograms of Carbon Dioxide) in a single semester."
+            << "\n\nReturning to main menu...\n\n" << "=====================================================================================================================\n\n";
+        return;
+    }
+
+    std::cin >> vehicle_choice;
+    switch (vehicle_choice)
+    {
+    case 1:
+        std::cout << "How many days a week do you attend school?\n\n";
+        std::cin >> days_a_week;
+        std::cout << "Approximately, how many miles does it take you to commute from home to school?\n\n";
+        std::cin >> miles;
+        std::cout << "You emit about " << vehicle_funct(days_a_week, miles, co2_small) << " kg CO2e(kilograms of Carbon Dioxide) from your small vehicle in a single semester."
+            << "\n\nReturning to main menu...\n\n" << "=====================================================================================================================\n\n";
+        return;
+    case 2:
+        std::cout << "How many days a week do you attend school?\n\n";
+        std::cin >> days_a_week;
+        std::cout << "Approximately, how many miles does it take you to commute from home to school?\n\n";
+        std::cin >> miles;
+        std::cout << "You emit about " << vehicle_funct(days_a_week, miles, co2_average) << " kg CO2e(kilograms of Carbon Dioxide) from your vehicle in a single semester."
+            << "\n\nReturning to main menu...\n\n" << "=====================================================================================================================\n\n";
+        return;
+    case 3:
+        std::cout << "How many days a week do you attend school?\n\n";
+        std::cin >> days_a_week;
+        std::cout << "Approximately, how many miles does it take you to commute from home to school?\n\n";
+        std::cin >> miles;
+        std::cout << "You emit about " << vehicle_funct(days_a_week, miles, co2_suvtruck) << " kg CO2e(kilograms of Carbon Dioxide) from your SUV/truck in a single semester."
+            << "\n\nReturning to main menu...\n\n" << "=====================================================================================================================\n\n";
+        return;
+    }
+}
+
+//enter "books" code here [Alyssa]
+void books()
+{
+    int soft;
+    int hard;
+
+    int first_choice;
+
+
+    std::cout << "Did you rent or buy any books this semester? \t0.No \t1.Yes\n\n";
+    std::cin >> first_choice;
+    switch (first_choice)
+    {
+    case 0:
+        std::cout << "Returning to main menu...\n\n"
+            << "=====================================================================================================================\n\n";
+
+        return;
+    case 1:
+        std::cout << "How many soft cover books did you buy this semester?\n";
+        std::cin >> soft;
+        std::cout << "How many hard cover books did you buy this semester?\n";
+        std::cin >> hard;
+        std::cout << "You emit about " << book_funct(soft, hard) << "kg CO2e(kilograms of Carbon Dioxide) from your book purchases in a single semester.\n\n";
+        if (soft + hard == 0)
+        {
+            std::cout << "Returning to main menu...\n\n";
+            return;
+        }
+        std::cout << "Based on the number of books you've rented and purchased, your books emit aprroximately " << book_funct(soft, hard) << " kg CO2 (kilograms of Carbon Dioxide) per semester.\n\n"
+            << "\n\nReturning to main menu...\n\n" << "=====================================================================================================================\n\n";
+    }
+
+
+
+}
+
+//enter "clothes" code here [Alyssa]
+void clothes()
+{
+    int num_clothes;
+
+    std::cout << "How many pieces of clothes do you buy in a month?\n";
+    std::cin >> num_clothes;
+    std::cout << "You emit about " << clothes_funct(num_clothes) << "kg CO2e(kilograms of Carbon Dioxide) from your clothes purchases in a single semester.\n\n"
+        << "=====================================================================================================================\n\n";
+}
+
+//enter "laptop" code here [Di'Andrei]
+void laptop()
+{
+    int hours;
+    int years_owned;
+
+    double co2 = 27;
+
+    std::cout << "On average, how many hours do you use your laptop in a day?\n";
+    std::cin >> hours;
+    std::cout << "How many years have you owned your laptop?\n";
+    std::cin >> years_owned;
+    std::cout << "You emit about " << laptop_funct(hours, co2, years_owned) << " kg CO2e(kilograms of Carbon Dioxide) from your laptop in a single semester."
+            << "\n\nReturning to main menu...\n\n" << "=====================================================================================================================\n\n";
+
+}
+
+//enter "smart phone" code here [Di'Andrei]
+void smart_phone()
+{
+    int hours;
+    int years_owned;
+
+    double co2 = 65;
+
+    std::cout << "On average, how many hours do you use your smart phone in a day?\n";
+    std::cin >> hours;
+    std::cout << "How many years have you owned your smart phone?\n";
+    std::cin >> years_owned;
+    std::cout << "You emit about " << smart_phone_funct(hours, co2, years_owned) << " kg CO2e(kilograms of Carbon Dioxide) from your smartphone in a single semester."
+            << "\n\nReturning to main menu...\n\n" << "=====================================================================================================================\n\n";
+
+        return;
+
+}
+
+//'main' function [Complete, but can be modified if necessary]
+int main()
+{
+
+    int main_menu;
+    do {
+
+        //Carbonfootprint categories
+        std::cout << "Which of your Carbon Footprints would you like to access?" << "\n\n";
+        std::cout << "1.Vehicles  \t2.Books  \t3. Clothes  \t4. Laptop  \t5. Smart Phone  \t6. Exit\n\n";
+        std::cin >> main_menu;
+
+        //(switch) main menu: cases are where 'void functions' go
+        switch (main_menu)
+        {
+        case 1:
+            vehicles();
+            break;
+        case 2:
+            books();
+            break;
+        case 3:
+            clothes();
+            break;
+        case 4:
+            laptop();
+            break;
+        case 5:
+            smart_phone();
+            break;
+        case 6:
+            std::cout << "Bye!" << std::endl;
+            return 0;
+        default:
+            break;
+        }
+    } while (main_menu != false);
+}
